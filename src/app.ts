@@ -1,6 +1,11 @@
-const greeting: string = "Hello from TS!";
+import { httpClient } from "./plugins/http-client.plugin";
+
+const id: number | string = "25";
 
 
-console.log({
-    greeting
-});
+httpClient.get(id).then(data => {
+    console.log({
+        id: data.id,
+        name: data.name
+    })
+}).catch(console.log);
