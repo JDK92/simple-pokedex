@@ -4,10 +4,6 @@ const getPokemonByNameOrIdUrl = (id: number | string): string => {
     return `https://pokeapi.co/api/v2/pokemon/${id}`;
 }
 
-interface RequestResponse {
-
-}
-
 export const httpClient = {
     get: async (id: number | string) => {
         const url = getPokemonByNameOrIdUrl(id);
