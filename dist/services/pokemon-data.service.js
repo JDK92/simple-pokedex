@@ -8,7 +8,7 @@ const getPokemonData = async (id) => {
     const { id: dexNumber, name, types, stats, abilities } = pokemonData;
     const pokemon = {
         dexNumber,
-        name,
+        name: name.toUpperCase(),
         type: (0, utils_1.getPokemonTypes)(types),
         abilities: (0, utils_1.getPokemonAbilities)(abilities),
         baseStats: (0, utils_1.getPokemonStats)(stats)

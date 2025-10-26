@@ -5,7 +5,8 @@ import { getPokemonData } from "./services/pokemon-data.service";
 
 // Interactive interface
 import { createInterface } from 'readline';
-import { Pokemon } from "./types/pokemon.interface";
+import { Pokemon, Ability, Stat } from "./types/pokemon.interface";
+import { paintColorType, createLogTable } from "./utils/utils";
 
 const rl = createInterface({
     input: process.stdin,
@@ -22,9 +23,9 @@ const startPokedex = async () => {
 
     let isRunning: boolean = true;
 
-    console.log("==========================".italic);
-    console.log("FIND POKEMON BY NAME OR ID".italic)
-    console.log("==========================".italic);
+    console.log("============================".italic);
+    console.log(" FIND POKEMON BY NAME OR ID ".italic)
+    console.log("============================".italic);
     console.log("\nPowered by pokeapi.co\n".grey);
 
     console.log("Enter EXIT if you want to quit the program.\n".cyan)
@@ -34,27 +35,34 @@ const startPokedex = async () => {
 
         if (answer.toUpperCase() === "EXIT") {
             isRunning = false;
+            break;
         }
 
         try {
             const pokemon: Pokemon = await getPokemonData(answer);
             const { abilities, baseStats, dexNumber, name, type } = pokemon;
 
-            console.log("Pokémon found!\n".bgWhite.black);
-            console.log(`${dexNumber} - ${name.toUpperCase()}`);
-            console.log(`Type: ${type}`)
-            console.log(`Abilities: ${abilities}`);
-
+            console.log("NAME:".bold)
+            console.log(`${dexNumber}.${name}`);
+            console.log(`${(type.length == 1) ? "TYPE:" : "TYPES:"}`);
+            type.forEach(paintColorType);
+            console.table(createLogTable(abilities));
+            console.table(createLogTable(baseStats));
 
             await askQuestion("\nPress enter to continue...\n")
 
         } catch (error) {
             console.log(`Pokémon not found with id or namer ${answer}. Try again.\n`.red);
+            await askQuestion("\nPress enter to continue...\n")
+
         }
 
     }
-
-    process.exit(0);
+    console.log("Closing in 3 seconds...")
+    setTimeout(() => {
+        console.log("Bye!");
+        process.exit(0);
+    }, 3000)
 }
 
 
