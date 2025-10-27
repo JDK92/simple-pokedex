@@ -19,5 +19,4 @@ export interface Pokemon {
 export interface Type {
     name: string;
     color: string;
-    style?: string;
 }
