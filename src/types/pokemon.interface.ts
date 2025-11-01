@@ -8,15 +8,16 @@ export interface Stat {
     value: number;
 }
 
-export interface Pokemon {
-    dexNumber: number;
-    name: string;
-    type: string[];
-    abilities: [];
-    baseStats: [];
-}
-
 export interface Type {
     name: string;
     color: string;
 }
+
+export interface Pokemon {
+    dexNumber: number;
+    name: string;
+    types: string[];
+    abilities: Ability[];
+    baseStats: Stat[];
+}
+

@@ -1,9 +1,4 @@
-export const createLogTable = (data: []): Record<number, any> => {
-    return data.reduce((pv: Record<number, any>, cv: Record<string, any>, i: number) => {
-        pv[i + 1] = { ...cv };
-        return pv;
-    }, {})
-};
+import { Type, Ability, Stat } from '../types/pokemon.interface';
 
 export const getPokemonTypes = (types: []) => {
 
@@ -26,8 +21,8 @@ export const getPokemonAbilities = (abilities: any) => {
         const { ability: { name }, is_hidden: isHidden } = b;
 
         a.push({
-            name: name.split("-").join(" ").toUpperCase(),
-            isHidden: (isHidden) ? "Yes" : "No"
+            name: name.split("-").join(" "),
+            isHidden
         });
 
         return a;
@@ -44,5 +39,22 @@ export const getPokemonStats = (stats: any) => {
             value
         }
     });
+
+};
+
+export const toUpperCammelCase = (txt: string) => {
+    if (!txt) return "";
+
+    const splittedText: string[] = txt.split("");
+
+    const [firstLetter, ...rest] = splittedText;
+
+    return [firstLetter?.toUpperCase(), ...rest].join("");
+};
+
+export const statBar = (value: number): string => {
+    const x: number = Math.ceil(value / 5);
+
+    return "0".repeat(x);
 
 };

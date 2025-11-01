@@ -10,8 +10,8 @@ export const getPokemonData = async (id: number | string) => {
 
     const pokemon: Pokemon = {
         dexNumber,
-        name: name.toUpperCase(),
-        type: getPokemonTypes(types),
+        name,
+        types: getPokemonTypes(types),
         abilities: getPokemonAbilities(abilities),
         baseStats: getPokemonStats(stats)
     }
